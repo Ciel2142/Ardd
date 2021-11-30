@@ -63,7 +63,7 @@ fun main() {
 
                     if (incrementing) {
                         incrementing = false
-                        val tick: Double = (100.0) / minutes
+                        val tick: Double = (100.0 + powerState) / minutes
                         while (powerLevel < 100) {
                             tickCounter += ceil(tick).toInt()
                             powerState += tick
