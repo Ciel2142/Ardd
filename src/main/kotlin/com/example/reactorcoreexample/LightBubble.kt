@@ -57,24 +57,26 @@ fun main() {
 
             for (i in intervals.indices step 2) {
                 if (tickCounter >= intervals[i] && tickCounter < intervals[i + 1]) {
-                    val minutes = (currentMinuteOfDay - tickCounter) + (intervals[i + 1] - intervals[i])
+                    val minutes = (intervals[i + 1] - intervals[i]) - (currentMinuteOfDay - tickCounter)
 
                     val tts: Long = (60_000 * (minutes / 100.0)).toLong()
 
                     if (incrementing) {
                         incrementing = false
                         val tick: Double = (100.0 + powerState) / minutes
+                        val counterTick = ceil(tick).toInt();
                         while (powerLevel < 100) {
-                            tickCounter += ceil(tick).toInt()
+                            tickCounter += counterTick
                             powerState += tick
                             powerLevel = round(powerState).toInt()
                             Thread.sleep(tts)
                         }
                     } else {
-                        val tick: Double = powerState / minutes
                         incrementing = true
+                        val tick: Double = powerState / minutes
+                        val counterTick = ceil(tick).toInt();
                         while (powerLevel > 0) {
-                            tickCounter += ceil(tick).toInt()
+                            tickCounter += counterTick
                             powerState -= tick
                             powerLevel = round(powerState).toInt()
                             Thread.sleep(tts)
