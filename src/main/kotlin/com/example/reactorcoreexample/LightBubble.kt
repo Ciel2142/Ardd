@@ -18,8 +18,8 @@ fun main() {
             var powerState: Double = powerLevel.toDouble()
             for (i in intervals.indices step 2) {
                 tickCounter = intervals[i]
-
                 val minutes = (intervals[i + 1] - intervals[i])
+
                 if (incrementing) {
                     incrementing = false
                     val tick: Double = (100.0) / minutes
@@ -48,7 +48,6 @@ fun main() {
                 if (tickCounter > 1440) {
                     tickCounter -= 1440
                 }
-                println("resulted power level $powerLevel and minute of day $currentMinuteOfDay == tickCounter $tickCounter")
                 if (initialized) break
             }
             initialized = true
@@ -58,8 +57,9 @@ fun main() {
             for (i in intervals.indices step 2) {
                 if (tickCounter >= intervals[i] && tickCounter < intervals[i + 1]) {
                     val minutes = (intervals[i + 1] - intervals[i]) - (currentMinuteOfDay - tickCounter)
-
-                    val tts: Long = (60_000 * (minutes / 100.0)).toLong()
+                    val div = if (minutes >= 100) 100.0 else minutes.toDouble();
+                    
+                    val tts: Long = (60_000 * (minutes / div)).toLong()
 
                     if (incrementing) {
                         incrementing = false
