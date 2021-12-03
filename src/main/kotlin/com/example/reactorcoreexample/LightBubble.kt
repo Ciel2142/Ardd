@@ -45,9 +45,6 @@ fun main() {
                         }
                     }
                 }
-                if (tickCounter > 1440) {
-                    tickCounter -= 1440
-                }
                 if (initialized) break
             }
             initialized = true
@@ -82,9 +79,6 @@ fun main() {
                             powerLevel = round(powerState).toInt()
                             Thread.sleep(tts)
                         }
-                    }
-                    if (tickCounter > 1440) {
-                        tickCounter -= 1440
                     }
                 } else {
                     tickCounter = intervals[i + 1]
