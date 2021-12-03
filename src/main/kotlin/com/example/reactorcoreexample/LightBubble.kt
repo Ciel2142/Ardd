@@ -56,14 +56,15 @@ fun main() {
 
             for (i in intervals.indices step 2) {
                 if (tickCounter >= intervals[i] && tickCounter < intervals[i + 1]) {
-                    val minutes = (intervals[i + 1] - intervals[i]) - (currentMinuteOfDay - tickCounter)
+                    val minutes = (intervals[i + 1] - intervals[i])
                     val div = if (minutes >= 100) 100.0 else minutes.toDouble();
                     
                     val tts: Long = (60_000 * (minutes / div)).toLong()
 
                     if (incrementing) {
                         incrementing = false
-                        val tick: Double = (100.0 + powerState) / minutes
+//                        val tick: Double = (100.0 + powerState) / minutes
+                        val tick: Double = (100.0) / minutes
                         val counterTick = ceil(tick).toInt();
                         while (powerLevel < 100) {
                             tickCounter += counterTick
